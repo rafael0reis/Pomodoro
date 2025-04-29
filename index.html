@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Pomodoro</title>
+</head>
+<body>
+    <header class="containerHeader">
+        <section class="logo">
+            <div class="nomePagina">
+                <p>Pomodoro</p>
+            </div>
+        </section>
+
+        <section class="itensCabecalho">
+            <div class="configuracao">
+                &#x2699;&#xFE0F; Config
+            </div>
+        </section>
+    </header>
+
+    <main class="containerMain">
+        <section class="tempoEscolha">
+            <div class="tempos">
+                <div class="produzir" id="faseProduzir">
+                    Pomodoro
+                </div>
+    
+                <div class="tempoCurto" id="faseCurta">
+                    Short Break
+                </div>
+    
+                <div class="tempoCumprido" id="faseCumprida">
+                    Long Break
+                </div>
+            </div>
+        </section>
+
+        <section class="temporizador">
+            <div class="valoresTemporizador">
+                <!-- seria mais fácil pegar o número dentro da div, mas não sei fazer isso-->
+                <div class="minutos" id="mint">
+                    <p>25</p>
+                </div>
+    
+                <div class="separador" id="sepd">
+                    <p>:</p>
+                </div>
+    
+                <div class="segundos" id="segd">
+                    <p>00</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="botoes">
+            <!--onclick = function()-->
+            <button class="comecar" id="bttComecar">
+                COMEÇAR
+            </button>
+            <button class="pausar" id="bttPausar">
+                PAUSAR
+            </button>
+            <button class="zerar" id="bttZerar">
+                ZERAR
+            </button>
+            <button class="continuar" id="bttContinuar">
+                CONTINUAR
+            </button>
+        </section>
+    </main>
+
+    <footer>
+        &copy;todos os direitos reservados <a href="" target="_blank">Rafael Reis</a>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Orbitron:wght@400..900&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    background-color: #a8dadc;
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    height: 3rem;
+    width: 30rem;
+    color: white;
+}
+.configuracao{
+    background-color: hsla(0, 0%, 100%, 0.3);
+    padding: .7rem 1rem;
+    border-radius: .3rem;
+    cursor: pointer;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: hsla(0, 0%, 100%, 0.3);
+    border-radius: 10px;
+    height: 25rem;
+    width: 35rem;
+    padding: 2rem;
+    margin: 4rem 0rem 11rem 0rem;
+}
+
+.tempos{
+    display: flex;
+    flex-direction: row;
+}
+.produzir{
+    background-color: #1d3557;
+    color: #f1faee;
+}
+.produzir, .tempoCurto, .tempoCumprido{
+    padding: .3rem 1rem;
+    border-radius: .3rem;
+    cursor: pointer;
+}
+.valoresTemporizador{
+    display: flex;
+    flex-direction: row;
+    color: #1d3557;
+    font-size: 10rem;
+    font-weight: bold;
+}
+
+
+.comecar, .pausar, .zerar, .continuar{
+    color: #a8dadc;
+    background-color: white;
+    font-size: 1.7rem;
+    font-weight: 600;
+    height: 75px;
+    width: 200px;
+    box-shadow: 0px 10px 0px #e2e2e2;
+    border: none;
+    border-radius: .4rem;
+    cursor: pointer;
+}
+
+.pausar, .zerar, .continuar{
+    display: none;
+}
+
+footer{
+    color: white;
+}
+
+footer a {
+    text-decoration: none;
+    color: #1d3557;
+    font-weight: 600;
+}
