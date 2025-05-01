@@ -21,9 +21,10 @@ var faseCumpridaEl = document.querySelector('#faseCumprida')
 
 var intervalTimer
 var verificacao = false
+var repetir = 0
 var tempos = {
-    incSeg: 60,
-    incMinPom: 25,
+    incSeg: 5,
+    incMinPom: 0,
     minTempoC: 5,
     minTempoL: 15
 }
@@ -33,8 +34,8 @@ var tempos = {
 
 //botões
 bttComecarEl.addEventListener('click', ()=>{iniciarPom()})
-bttPausarEl.addEventListener('click', pausarContador)
-bttContinuarEl.addEventListener('click', continuarContador)
+bttPausarEl.addEventListener('click', pausar)
+bttContinuarEl.addEventListener('click', continuar)
 
 //fases
 faseCurtaEl.addEventListener('click', pausaCurta)
@@ -44,58 +45,71 @@ faseProduzirEl.addEventListener('click', faseProduzir)
 
 //funções de funcionamento
 
-//função que vai diminuir com base nos valores que receber, e vai atualizar na tela em tempo real
+//contador adaptado pra receber qualquer minuto
 function contador(mint, segd){
+    console.log(mint, segd)
+
+    let somaSegd = (mint * 60) + segd
+    console.log(somaSegd)
+
+    mintEl.innerHTML = `${formatTimer(mint)}`
+    segdEl.innerHTML = `${formatTimer(segd)}`    
 
     intervalTimer = setInterval(()=>{
-        
+        if(!verificacao){
+            somaSegd--
+            
+            let seg = Math.floor(somaSegd % 60)
+            let min = Math.floor(somaSegd / 60)
+            console.log(min, seg)
+            console.log(somaSegd)
+
+            mintEl.innerHTML = `${formatTimer(min)}`
+            segdEl.innerHTML = `${formatTimer(seg)}`
+        }
+
+        if(somaSegd == 0){
+            repetir++
+            if(repetir==4){
+                repetir - 4
+            }
+
+            
+            switch(repetir){
+                case 1:
+                    pausaCurta()
+                break
+                case 2:
+
+                break
+
+                case 3:
+
+                break
+                case 4:
+
+                break
+                default:
+                    clearInterval(intervalTimer)
+                break
+            }
+        }
     }, 1000)
+
 }
 
 function iniciarPom(){
+    bttComecarEl.style.display = 'none'
+    bttPausarEl.style.display = 'block'
+    bttContinuarEl.style.display = 'none'
     contador(tempos.incMinPom, tempos.incSeg)
-
-    // verificacao = verify
-    
-    // bttComecarEl.style.display = 'none'
-    // bttContinuarEl.style.display = 'none'
-    
-    // bttPausarEl.style.display = 'block'
-    // bttPausarEl.style.boxShadow = 'none'
-    // bttPausarEl.style.height = '65px'
-    // bttPausarEl.style.marginTop = '10px'
-
-    // if(!verificacao){
-    //     tempos.incSeg --
-    //     tempos.incMinPom --
-        
-    //     mintEl.textContent = `${formatTimer(tempos.incMinPom)}`
-    //     segdEl.textContent = `${tempos.incSeg}`
-    // }
-
-    // intervalTimer = setInterval(()=>{
-    //     if(!verificacao){
-    //         tempos.incSeg--
-    //         segdEl.textContent = `${formatTimer(tempos.incSeg)}`
-    //         if(tempos.incMinPom > 0){
-    //             if(tempos.incSeg == 0){
-    //                 tempos.incSeg = 60
-    //                 tempos.incMinPom--
-    //                 mintEl.textContent = `${formatTimer(tempos.incMinPom)}`
-    //             }
-    //         }else if(tempos.incMinPom == 0 & tempos.incSeg == 0){
-    //             clearInterval(intervalTimer)
-    //         }
-    //     }
-
-    // }, 1000)
 }
-function pausarContador(){
+function pausar(){
         verificacao = true
-        bttPausarEl.style.display   = 'none'
+        bttPausarEl.style.display    = 'none'
         bttContinuarEl.style.display = 'block'
 }
-function continuarContador(){
+function continuar(){
         verificacao = false
         bttContinuarEl.style.display = 'none'
         bttPausarEl.style.display    = 'block'
@@ -103,12 +117,7 @@ function continuarContador(){
 
 //ao clicar no shortbreak
 function pausaCurta(){
-
-    // clearInterval(intervalTimer)
-    // iniciarContador(true)
-    // bttPausarEl.style.display = 'none'
-    // bttComecarEl.style.display = 'block'
-    // bttContinuarEl.style.display = 'none'
+    contador(tempos.minTempoC, tempos.incSeg)
 }
 
 function faseProduzir(){
@@ -116,7 +125,7 @@ function faseProduzir(){
 }
 
 
-//funções de apoio
+//funções de apoio-
 
 //formata números menores que 10 com 0 antes
 function formatTimer(num){
