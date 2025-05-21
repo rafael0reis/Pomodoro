@@ -7,7 +7,7 @@
     <script src="script.js" defer></script>
     <title>Pomodoro</title>
 </head>
-<body>
+<body class="fundoSite">
     <header class="containerHeader">
         <section class="logo">
             <div class="nomePagina">
@@ -25,7 +25,7 @@
     <main class="containerMain">
         <section class="tempoEscolha">
             <div class="tempos">
-                <div class="produzir" id="faseProduzir">
+                <div class="produzir bgFases" id="faseProduzir">
                     Pomodoro
                 </div>
     
@@ -41,7 +41,6 @@
 
         <section class="temporizador">
             <div class="valoresTemporizador">
-                <!-- seria mais fácil pegar o número dentro da div, mas não sei fazer isso-->
                 <div class="minutos" id="mint">
                     <p>25</p>
                 </div>
@@ -64,17 +63,17 @@
             <button class="pausar" id="bttPausar">
                 PAUSAR
             </button>
-            <button class="zerar" id="bttZerar">
-                ZERAR
-            </button>
             <button class="continuar" id="bttContinuar">
                 CONTINUAR
             </button>
+            <div class="totalCiclosEl" id="bttReiniciar">
+                <p>#0</p>
+            </div>
         </section>
     </main>
 
     <footer>
-        &copy;todos os direitos reservados <a href="" target="_blank">Rafael Reis</a>
+        &copy;todos os direitos reservados <a class="link" href="https://github.com/rafael0reis" target="_blank">Rafael Reis</a>
     </footer>
 </body>
 </html>
