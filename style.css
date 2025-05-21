@@ -88,7 +88,7 @@ main{
 }
 .comecar, .pausar, .continuar{
     color: #1d3557;
-    background-color: white;
+    background-color: #F1FAEE;
     font-size: 1.7rem;
     font-weight: 700;
     height: 75px;
@@ -115,13 +115,27 @@ main{
     font-size: 20px;
     font-weight: 600;
     position: absolute;
-    right: 65px;
+    right: 20px;
     top: 50%;
     transform: translateY(-50%);
+    cursor: pointer;
+    background-color: #F1FAEE;
+    padding: 5px 7px;
+    border-radius: 4px;
+}
+.reiniciar{
+    position: absolute;
+    left: 20px;
+    background-color: #f1faee;
+    padding: 5px 8px;
+    font-size: 20px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 footer{
-    color: white;
+    color: #F1FAEE;
 }
 
 footer a {

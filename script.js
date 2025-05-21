@@ -27,6 +27,7 @@ var bttComecarEl = document.getElementById('bttComecar')
 var bttPausarEl  = document.querySelector('#bttPausar')
 var bttZerarEl   = document.querySelector('#bttZerar')
 var bttContinuarEl = document.querySelector('#bttContinuar')
+var bttReiniciarEl = document.querySelector('.reiniciar')
 
             //botões das fases
 var faseProduzirEl = document.querySelector('#faseProduzir')
@@ -43,7 +44,7 @@ var verificacao = false
 var repeticoes = {
     faseAtual: 'Pomodoro',
     cicloPomo: 0,
-    cicloGeral: 4,
+    cicloGeral: 0,
 }
 
             //variáveis que são objetos
@@ -51,11 +52,11 @@ var repeticoes = {
 var tempos = {
     //tempos pré-definidos padrão
     segundosUsuario: 0,
-    inicioMinutos: 0.1,
-    minTempoC: 0.1,
-    minTempoL: 0.1,
+    inicioMinutos: 25,
+    minTempoC: 5,
+    minTempoL: 15,
     //auxiliares com valores pré definidos
-    auxiliarMinutos: 0.1,
+    auxiliarMinutos: 25,
     auxiliarSegundos: 0
 }
 
@@ -66,6 +67,27 @@ var tempos = {
 bttComecarEl.addEventListener('click', ()=>{iniciarPom()})
 bttPausarEl.addEventListener('click', pausar)
 bttContinuarEl.addEventListener('click', continuar)
+
+            //botão que força pular as fases
+
+totalCiclosEl.addEventListener('click', ()=>{
+    somDeClique.currentTime = 0
+    somDeClique.play()
+    clearInterval(intervalTimer)
+    contador(0, 1)
+})
+
+            //botão que reiniciar o contador
+
+bttReiniciarEl.addEventListener('click', ()=>{
+    clearInterval(intervalTimer)
+    repeticoes.faseAtual = 'Pomodoro'
+    repeticoes.cicloPomo = 0
+    repeticoes.cicloGeral = 0
+    totalCiclosEl.textContent = '#0'
+    location.reload()
+    faseProduzir()
+})
 
             //fases
 faseProduzirEl.addEventListener('click', faseProduzir)
@@ -88,6 +110,7 @@ function contador(mint, segd){
             segdEl.innerHTML = `${formatTimer(seg)}`
 
             if(somaSegd === 0){
+                somAlarme.currentTime = 0
                 somAlarme.play()
                 clearInterval(intervalTimer)
                 passarFase()
@@ -122,6 +145,7 @@ function continuar(){
     botoesOnOff(bttPausarEl)
 }
 
+
             //manipulação dos tempos
 
 function faseProduzir(){
@@ -145,7 +169,7 @@ function faseProduzir(){
     //muda a cor do timer
     mudarCor(valTempEl, '#1D3557')
     //muda o backgroundColor do button
-    mudarBg(botoesEl, 'white')
+    mudarBg(botoesEl, '#F1FAEE')
     //troca o estilo do botão da fase
     faseAtiva(faseProduzirEl)
     
@@ -222,14 +246,14 @@ function passarFase(){
     switch(repeticoes.faseAtual){
         case 'Pomodoro':
             switch(true){
-                case repeticoes.cicloGeral < 4:
+                case repeticoes.cicloGeral < 3:
                     repeticoes.cicloPomo ++
                     repeticoes.cicloGeral ++
                     repeticoes.faseAtual = 'shortBreak'
                     pausaCurta()
                     break
-                case repeticoes.cicloGeral === 4:
-                    repeticoes.cicloGeral - 4
+                case repeticoes.cicloGeral === 3:
+                    repeticoes.cicloGeral = 0
                     repeticoes.faseAtual = 'longBreak'
                     pausaLonga()
                     break
@@ -237,10 +261,14 @@ function passarFase(){
             break
         case 'shortBreak':
             repeticoes.faseAtual = 'Pomodoro'
+            totalCiclosEl.textContent = `#${repeticoes.cicloPomo}`
             faseProduzir()
             break
         case 'longBreak':
             repeticoes.faseAtual = 'Pomodoro'
+            repeticoes.cicloPomo ++
+            totalCiclosEl.textContent = `#${repeticoes.cicloPomo}`
+            repeticoes.cicloGeral = 0
             faseProduzir()
             break
     }
